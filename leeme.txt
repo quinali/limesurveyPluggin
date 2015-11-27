@@ -1,0 +1,16 @@
+select 
+qid,parent_qid,sid,gid,title,question,
+(CASE parent_qid WHEN 0 
+  THEN CONCAT(sid,'X',gid,'X',qid)
+  ELSE CONCAT(sid,'X',gid,'X',parent_qid,title)
+END) as CALCULO
+FROM questions where sid=174561;
+
+
+/*QUERY PARA ALIMENTAR EL SELECT*/
+ select (CASE parent_qid WHEN 0 
+  THEN CONCAT(sid,'X',gid,'X',qid)
+  ELSE CONCAT(sid,'X',gid,'X',parent_qid,title)
+END) as VALUE,
+CONCAT(TITLE,': ',question)
+ from questions where sid=174561;
