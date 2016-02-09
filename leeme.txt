@@ -14,3 +14,6 @@ FROM questions where sid=174561;
 END) as VALUE,
 CONCAT(TITLE,': ',question)
  from questions where sid=174561;
+ 
+ 
+/*QUERY PARA ACTUALIZAR VALOR POR DEFECTO DE CAMPO OBSERVACIONES*/
