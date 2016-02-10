@@ -1,0 +1,46 @@
+PASOS
+-----
+
+1- Copia de seguridad de BD
+2- Copia de seguridad de servidor limesurvey
+3- Copia de seguridad de servidor encuestas
+
+4- Descarga de ficheros limesurvey y sobreescribir el original
+5- Checkout de la rama de encuestasMKP
+
+
+PROCESO PARA ELIMINAR OBSERVACIONES COMO RECARCABLE E INCLUIR ATTRIBUTE_2 como recargable:
+------------------------------------------------------------------------------------------
+
+1-
+
+select 
+CONCAT(
+'update surveys sv set sv.attributedescriptions=\'',
+sv.attributedescriptions,'\' where sv.sid=',sv.sid,';'),
+CONCAT(q.sid,'X',q.gid,'X',q.qid)
+from surveys sv
+join questions q on q.sid=sv.sid and q.question like '%indique las observaciones%'
+where sv.active<>'N';
+
+
+2-Exportamos a Notepad++ y reemplazamos la regexp de: ... 
+
+
+^\"(.*)\"$ por \1
+
+\" por "
+
+;"," por ;
+
+(attribute_2.*cpdbmap\"\:\")(.*)(\"\}\,\"attribute_3.*)([0-9]{6}X[0-9]{2,}X[0-9]{2,})    por    \1\4\3
+
+
+
+
+
+3-
+
+insert into defaultvalues
+select qid as qid,'0' as scale_id,'0' as sqid,'es' as language,'' as specialtype,'{TOKEN:ATTRIBUTE_2}' as defaultvalue from questions where question like '%indique las observaciones%';
+
