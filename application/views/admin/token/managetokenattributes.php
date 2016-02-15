@@ -68,12 +68,11 @@
                             }*/
 							
 							
-							//JNL - Vamos a los localizar attribute_1 y attribute_2 y deshabilitarlo.
+							//JNL - Vamos a los localizar attribute_1 deshabilitarlo.
 							// No podemos dejar que se sobreesciba el valor, ya que tiene el operador que posee la llamada
 							
 							echo '<select name="cpdbmap_'.$sTokenField.'" '; 
 							
-							//if($sTokenField=='attribute_1' || $sTokenField=='attribute_2'){
 							if($sTokenField=='attribute_1'){	
 								echo ' disabled ';
 							}
